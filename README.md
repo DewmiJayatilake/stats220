@@ -10,11 +10,10 @@ This is my repo for **STATS 220**.
   3. **Reproducible reporting**
   4.  **Ethical data practices**
 
-#Useful links 
-- 
+#Fun Stuff:
+My fav youtube channel right now: [https://www.youtube.com/@isaasungLinks to an external site]
 
 
 ##Fun Stuff
-A meme that captures how I currently feel about my university studies is 
 
 ![](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWttdjZtMjEyNGVrd2JlcWhrdDY1bTBzYnJ2d25hN2s4NnRiazJyZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qdDO6hTcyeDks/giphy.gif)
