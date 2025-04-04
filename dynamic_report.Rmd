@@ -1,0 +1,119 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+  margin: 20px;
+}
+
+h2 {
+  color: #4c4c4c;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 4px;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+
+```
+
+
+## Patterns in Ad Format and Engagment on Instragram 
+
+```{r}
+library(tidyverse)
+
+# Load data
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSgXAo3WnZZUV7bNZYzOXYLWH7z4oob3nRHw14M2bauFGU1dcT8eUQ8l25K99I3rhoj0kp1rzUuC_o6/pub?output=csv")
+
+# Rename columns
+latest_data <- rename(logged_data,
+                      product = "What type of product was being advertised?",
+                      format = "What type of format was used for this ad?",
+                      known_brand = "Did you recognize the brand before seeing the ad?",
+                      appeal = "How appealing was the ad? (1 = Not appealing at all, 5 = Very appealing)",
+                      interaction = "Did you interact with the ad? (like, share, comment, click, saved, etc)")
+
+#Summary statistics 
+min(latest_data$appeal, na.rm = TRUE)    #Lowest appeal score
+max(latest_data$appeal, na.rm = TRUE)    #Highest appeal score
+mean(latest_data$appeal, na.rm = TRUE)   #Average appeal score
+
+#Counts and comparisons
+count(latest_data, interaction)          #How many ads were interacted with 
+count(latest_data, format)               #Count of each ad format
+length(latest_data$appeal)               #Total number of ads recorded
+
+# Calculate percentage of interaction
+interaction_rate <- latest_data %>%
+  count(interaction) %>%
+  mutate(percent = round(n / sum(n) * 100, 1))
+
+
+```
+
+Over a week, I kept track of 20 Instagram ads I came across and noticed some interesting patterns. My goal was to figure out which types of ads were most common, how engaging they were, and if things like brand familiarity played a role in whether I interacted with the ad or not.
+
+On average, I rated the ads around 3.5 out of 5 in terms of appeal. Some stood out a lot more than others, with a couple rated as low as 1, and a few getting a full 5. Out of the 20 ads, I ended up interacting with 11 of them — that’s just over half. 
+
+
+
+## Most Common Format of Instagram Ad
+
+```{r}
+
+
+#Bar chart showing engagement across ad formats 
+ggplot(latest_data,
+       aes(x = format)) + 
+  geom_bar(fill = "pink") + 
+  labs(title = "Most Common Instagram Ad Formats in My Feed", 
+       x = "Ad Format", 
+       y = "Number of Times Seen") 
+
+
+```
+Instagram definitely seems to favour video content. I saw a lot of Stories, Reels, and Video ads. Story ads were the most common, and honestly, that makes sense — they’re quick and easy to scroll through, and they blend in with the rest of the content. Carousels were less common, probably because they take more effort to swipe through. 
+
+
+## Types of Products Advertised 
+```{r}
+
+
+#Bar chart for product types advertised
+ggplot(latest_data,
+       aes(x = product)) +
+  geom_bar(fill = "lightblue")+
+  labs(title = "Types of Products Advertised", 
+       x = "Product Type", 
+       y = "Number of Ads")
+
+
+```
+Fashion and Entertainment were the most advertised product types in my feed. This didn’t surprise me at all. As I follow a lot of creators and pages in those areas, so Instagram probably uses that to tailor the ads I see. I don’t really engage with food or home content much, and those ads showed up way less frequently.
+
+
+
+## Interaction by Brand Familiarity
+```{r}
+
+count(latest_data, known_brand, interaction)
+
+```
+
+This table shows that I was more likely to interact with ads from brands I already knew. Out of 12 ads from familiar brands, I interacted with 8. But for the 8 ads from unknown brands, I only interacted with 3. I think it’s just easier to trust or be curious about a brand when you’ve seen or heard of it before — especially on a platform like Instagram, where ads kind of look like normal posts.
+
+
