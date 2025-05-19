@@ -20,8 +20,8 @@ My fav youtube channel right now: [https://www.youtube.com/@isaasungLinks to an 
 
 
 
-### 🔗 Project 4: Visual Data Story
+###  Project 4: Visual Data Story
 
 View my visual data story here:  
-👉 [visual_data_story.html](https://DewmiJayatilake.github.io/stats220/visual_data_story.html)
+> [visual_data_story.html](https://DewmiJayatilake.github.io/stats220/visual_data_story.html)
 
